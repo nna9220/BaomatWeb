@@ -1,0 +1,74 @@
+@charset "UTF-8";
+#header {
+	position: relative;
+	background-color: #f6f6f6;
+}
+
+.nav {
+    width: var(--nav-width);
+    height: var(--nav-height);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image_left {
+    background: #f6f6f6 url('https://fit.hcmute.edu.vn/Resources/Images/SubDomain/fit/logo-news.png') no-repeat left top;
+    width: 600px;
+}
+
+.image_right {
+    background: #f6f6f6 url('https://fit.hcmute.edu.vn/Resources/Images/SubDomain/fit/logo-cntt2021.png') no-repeat right top;
+    background-size: cover;
+    width: 150px;
+    height: 120px;
+}
+
+.header_login {
+    background-color: var(--header-background-color);
+    padding: 4px 0;
+}
+
+.header_login button {
+    float: right;
+    color: var(--white-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    height: var(--button-height);
+    min-width: var(--button-width);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background-color: #58ADe5;
+    cursor: pointer;
+}
+
+.header_login-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.header_login-container button {
+    color: var(--white-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    height: var(--button-height);
+    min-width: var(--button-width);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background-color: #58ADe5;
+    cursor: pointer;
+}
+
+.header_login-container div {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-right: 24px;
+    color: #FFFF00;
+}
+
+.login-name__container {
+	display: flex;
+	justify-content: flex-end;
+}
