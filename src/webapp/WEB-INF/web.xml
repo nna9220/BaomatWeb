@@ -7,18 +7,15 @@
 	<welcome-file-list>
 		<welcome-file>/pages/index.jsp</welcome-file>
 	</welcome-file-list>
-	<!-- 
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/pages/500.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/pages/500.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/pages/404.jsp</location>
-	</error-page>
-	 -->
+	<!-- <error-page> <exception-type>java.lang.Exception</exception-type> <location>/pages/500.jsp</location> 
+		</error-page> <error-page> <error-code>500</error-code> <location>/pages/500.jsp</location> 
+		</error-page> <error-page> <error-code>404</error-code> <location>/pages/404.jsp</location> 
+		</error-page> -->
+	<session-config>
+		<cookie-config>
+			<http-only>true</http-only>
+			<secure>true</secure>
+		</cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
 </web-app>
