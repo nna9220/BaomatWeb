@@ -4,11 +4,9 @@
 
 <%
 String context = request.getContextPath();
-response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <jsp:include page="../../partials/head.jsp"></jsp:include>
 <title>Edit Student | Topic Registration Admin</title>

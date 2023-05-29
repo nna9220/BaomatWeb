@@ -5,7 +5,6 @@
 <%
 String context = request.getContextPath();
 String check = (String) request.getAttribute("notExistPeriod");
-response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 
 <!DOCTYPE html>

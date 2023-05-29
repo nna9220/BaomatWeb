@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 String context = request.getContextPath();
-response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <div class="mb-3 d-flex justify-content-between">
 	<a href="<%=context%>/admin/users/?type=${type}" class="btn btn-success"
