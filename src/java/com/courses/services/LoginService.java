@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,6 +22,13 @@ public class LoginService extends SuperService {
 
 	public LoginService(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
+	}
+
+	public static String generateCSRFToken() {
+		SecureRandom secureRandom = new SecureRandom();
+		byte[] tokenBytes = new byte[16];
+		secureRandom.nextBytes(tokenBytes);
+		return Base64.getUrlEncoder().withoutPadding().encodeToString(tokenBytes);
 	}
 
 	private String hashSHA256(String password) {
@@ -46,7 +55,8 @@ public class LoginService extends SuperService {
 
 	public void handleGetLogin() throws ServletException, IOException {
 		String url = "/pages/client/login.jsp";
-
+		String csrfToken = generateCSRFToken();
+		request.getSession().setAttribute("csrfToken", csrfToken);
 		super.forwardToPage(url);
 	}
 
@@ -71,6 +81,8 @@ public class LoginService extends SuperService {
 
 	public void handlePostLogin() throws IOException, ServletException {
 		HttpSession session = request.getSession();
+		String csrfToken = request.getParameter("csrfToken");
+		String sessionToken = (String) request.getSession().getAttribute("csrfToken");
 		try {
 			// define default url
 			String url = "/pages/client/login.jsp";
@@ -80,7 +92,6 @@ public class LoginService extends SuperService {
 			String role = this.request.getParameter("role-account");
 			String username = this.request.getParameter("username");
 			String password = hashSHA256(this.request.getParameter("password"));
-			
 
 			// find account and user
 			Account foundAccount = getAccount(username);
@@ -94,31 +105,35 @@ public class LoginService extends SuperService {
 			if (foundAccount != null && checkRole(role, person) && person.getIsDeleted() == 0) {
 				if (password.equals(foundAccount.getPassword())) {
 					System.out.print(password);
+					if (csrfToken == null || !csrfToken.equals(sessionToken)) {
+						String pageError = "/pages/500.jsp";
+						super.forwardToPage(pageError);
+					} else {
 
-					// define user id cookie timeout 30'
-					Cookie c = new Cookie("userIdCookie", person.getPersonId());
-					// 30 min
-					c.setMaxAge(30 * 60);
-					c.setPath("/");
-					this.response.addCookie(c);
+						// define user id cookie timeout 30'
+						Cookie c = new Cookie("userIdCookie", person.getPersonId());
+						// 30 min
+						c.setMaxAge(30 * 60);
+						c.setPath("/");
+						this.response.addCookie(c);
 
-					// define url base on role
-					if (role.equals("student")) {
-						// forward to student home page
-						url = "/student/home/";
-					} else if (role.equals("teacher")) {
-						// forward to teacher home page
-						url = "/teacher/home/";
-					} else if (role.equals("admin")) {
-						// forward to admin home page
-						url = "/admin/";
+						// define url base on role
+						if (role.equals("student")) {
+							// forward to student home page
+							url = "/student/home/";
+						} else if (role.equals("teacher")) {
+							// forward to teacher home page
+							url = "/teacher/home/";
+						} else if (role.equals("admin")) {
+							// forward to admin home page
+							url = "/admin/";
+						}
 					}
 				} else {
 					// exist account but incorrect password was found
 					url = "/pages/client/login.jsp";
 					errorMessage = "* Mật khẩu không đúng !";
 				}
-
 			} else {
 				// doesn't exist account
 				url = "/pages/client/login.jsp";
