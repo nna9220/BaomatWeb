@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import com.courses.dao.AccountDAO;
 import com.courses.models.Account;
 import com.courses.models.Person;
-import com.courses.filter.InputValidation;
 
 public class LoginService extends SuperService {
 
@@ -99,7 +98,7 @@ public class LoginService extends SuperService {
 			System.out.println("username: " + username);
 			System.out.println("password: " + password);
 
-			String password = hashSHA256(this.request.getParameter("password"));
+			password = hashSHA256(this.request.getParameter("password"));
 
 
 			// find account and user
@@ -111,14 +110,6 @@ public class LoginService extends SuperService {
 				person = foundAccount.getPerson();
 			}
 
-		
-			 // Kiểm tra đầu vào 
-			if (!(InputValidation.isCheckEmail(username) && InputValidation.isCheckPassword(password) && InputValidation.isCheckRole(role))) {
-			 System.out.print("Dữ liệu đầu vào không hợp lệ"); url =
-			 "/pages/client/login.jsp"; errorMessage = "* Không tìm thấy tài khoản !";
-			 request.setAttribute("error", errorMessage); super.forwardToPage(url);
-			 return; }
-			
 
 			// check if this account is existing
 			if (foundAccount != null && checkRole(role, person) && person.getIsDeleted() == 0) {
@@ -132,6 +123,7 @@ public class LoginService extends SuperService {
 						// define user id cookie timeout 30'
 						Cookie c = new Cookie("userIdCookie", person.getPersonId());
 						// 30 min
+						
 						c.setMaxAge(30 * 60);
 						c.setPath("/");
 						this.response.addCookie(c);
@@ -147,27 +139,6 @@ public class LoginService extends SuperService {
 							// forward to admin home page
 							url = "/admin/";
 						}
-
-					// define user id cookie timeout 30'
-					Cookie c = new Cookie("userIdCookie", person.getPersonId());
-					// 30 min
-					c.setMaxAge(30 * 60);
-					c.setPath("/");
-					c.setHttpOnly(true);
-					c.setSecure(true);
-					this.response.addCookie(c);
-
-					// define url base on role
-					if (role.equals("student")) {
-						// forward to student home page
-						url = "/student/home/";
-					} else if (role.equals("teacher")) {
-						// forward to teacher home page
-						url = "/teacher/home/";
-					} else if (role.equals("admin")) {
-						// forward to admin home page
-						url = "/admin/";
-
 					}
 				} else {
 					// exist account but incorrect password was found

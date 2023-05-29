@@ -7,6 +7,8 @@
 <%
 String context = request.getContextPath();
 StudentService studentService = new StudentService();
+
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 
 

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String context = request.getContextPath();
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <!-- <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' unsafe-eval' 'unsafe-inline';

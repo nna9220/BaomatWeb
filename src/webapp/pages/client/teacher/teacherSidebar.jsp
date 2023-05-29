@@ -30,6 +30,7 @@ Person person = personDAO.find(userId);
 Map<String, Object> params = new HashMap<>();
 params.put("person", person);
 Teacher teacher = teacherDAO.findByPerson(params);
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <ul class="category-list">
 	<li class="category-item"><ion-icon name="home-outline"></ion-icon>

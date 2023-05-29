@@ -8,6 +8,8 @@
 
 <%
 String type = (String) request.getAttribute("type");
+
+response.setHeader("X-Content-Type-Options", "nosniff");
 String title = type.substring(0, 1).toUpperCase() + type.substring(1);
 String prefix = "";
 if (type.equals(RoleConstants.ADMIN)) {

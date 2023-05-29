@@ -4,6 +4,11 @@
 <%
 String context = request.getContextPath();
 request.setCharacterEncoding("utf-8");
+String setCookieHeader = "JSESSIONID" + "=" + session.getId()
+		+ "; Path=/CoursesRegistrationApp; SameSite=Strict; HttpOnly; Secure";
+response.setHeader("Set-Cookie", setCookieHeader);
+response.setHeader("X-Frame-Options", "SAMEORIGIN"); 
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 
 <!DOCTYPE html>
@@ -20,20 +25,12 @@ request.setCharacterEncoding("utf-8");
 			<div class="grid">
 				<div class="form_container">
 
-					<form id="form" action="<%=context%>/login" method="POST">
-					<form id="form" action="<%=context%>/login" method="POST" onsubmit="validateForm(event);">
+					<form id="form" action="login" method="POST"
+						onsubmit="validateForm(event);">
 						<h2 class="login-label">Đăng nhập</h2>
 						<div class="login_role">
 							<div class="login_role-item">
 								<input type="radio" id="sinhvien" value="student"
-
-									name="role-account" checked="checked" /> <label
-									for="sinhvien">Sinh viên</label>
-							</div>
-							<div class="login_role-item">
-								<input type="radio" id="giangvien" value="teacher"
-									name="role-account" /> <label
-									for="giangvien">Giảng viên</label>
 									name="role-account" checked="checked" /> <label for="sinhvien">Sinh
 									viên</label>
 							</div>
@@ -50,24 +47,19 @@ request.setCharacterEncoding("utf-8");
 
 						<div class="login_input">
 							<input type="hidden" name="csrfToken"
-								value="${sessionScope.csrfToken}"> <label
-								for="username" class="login_input-label">Tên
-								đăng nhập:</label> <input type="text" id="username" name="username"
-							<label for="username" class="login_input-label">Tên đăng
-								nhập:</label> <input type="text" id="username" name="username"
-								value="${username}"
+								value="${sessionScope.csrfToken}"> <label for="username"
+								class="login_input-label">Tên đăng nhập:</label> <input
+								type="text" id="username" name="username" value="${username}"
 								class="login_input-input login_input-input--boder" required />
 						</div>
 
 						<div class="login_input">
-							<label for="password" class="login_input-label">Mật
-								khẩu:</label> <input type="password" id="password" name="password"
-								value="${password}"
 							<label for="password" class="login_input-label">Mật khẩu:</label>
 							<input type="password" id="password" name="password"
-							value="${password}"
+								autocomplete="off" value="${password}"
 								class="login_input-input login_input-input--boder" required />
 						</div>
+
 						<div>
 							<p style="font-size: 1rem; color: red">${error}</p>
 						</div>
@@ -87,47 +79,46 @@ request.setCharacterEncoding("utf-8");
 					</form>
 				</div>
 			</div>
-			<!--HTML entities onsubmit="validateForm(event);" -->
+			<!--HTML entities onsubmit="validateForm(event);" 
 			<script nonce="2726c7f26c">
 				function encodeHtmlEntities(str) {
-					  var tempElement = document.createElement("textarea");
-					  tempElement.textContent = str;
-					  return tempElement.innerHTML;
+					var tempElement = document.createElement("textarea");
+					tempElement.textContent = str;
+					return tempElement.innerHTML;
+				}
+
+				function validateForm(event) {
+					event.preventDefault(); // Ngăn chặn việc submit form
+
+					let form = document.getElementById("form");
+					let textInput1 = document.getElementById("username");
+					let textInput2 = document.getElementById("password");
+
+					console.log(textInput1.value);
+					console.log(textInput2.value);
+
+					let encodedTextInput1 = encodeHtmlEntities(textInput1.value);
+					let encodedTextInput2 = encodeHtmlEntities(textInput2.value);
+
+					console.log(encodedTextInput1);
+					console.log(encodedTextInput2);
+
+					textInput1.value = encodedTextInput1;
+					textInput2.value = encodedTextInput2;
+
+					console.log("1");
+
+					if (encodedTextInput1 === '' || encodedTextInput2 === '') {
+						alert('Vui lòng điền đầy đủ thông tin');
+					} else {
+						form.submit();
 					}
-			    
-			    function validateForm(event) {
-		            event.preventDefault(); // Ngăn chặn việc submit form
+				}
 
-		            let form = document.getElementById("form");
-		            let textInput1 = document.getElementById("username");
-		            let textInput2 = document.getElementById("password");
-		            
-		            console.log(textInput1.value);
-		            console.log(textInput2.value);
-
-		            let encodedTextInput1 = encodeHtmlEntities(textInput1.value);
-		            let encodedTextInput2 = encodeHtmlEntities(textInput2.value);
-		            
-		            console.log(encodedTextInput1);
-		            console.log(encodedTextInput2);
-		            
-		            textInput1.value = encodedTextInput1;
-		            textInput2.value = encodedTextInput2;
-		            
-		            
-		            console.log("1");
-
-		            if (encodedTextInput1 === '' || encodedTextInput2 === '') {
-		                alert('Vui lòng điền đầy đủ thông tin');
-		            } else {
-		            	form.submit();
-		            }
-		        }
-			    
-			    let form = document.getElementById("form");
+				let form = document.getElementById("form");
 				form.addEventListener('submit', validateForm);
-			</script>
-			
+			</script> -->
+
 			<!-- DOMPurify -->
 			<!-- <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.0/dist/purify.min.js"></script>
 		    <script  nonce="2726c7f26c">

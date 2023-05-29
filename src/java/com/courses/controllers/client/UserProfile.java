@@ -1,6 +1,7 @@
 package com.courses.controllers.client;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,5 +35,4 @@ public class UserProfile extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

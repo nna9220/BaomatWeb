@@ -4,6 +4,11 @@
 <%
 String context = request.getContextPath();
 request.setCharacterEncoding("utf-8");
+String setCookieHeader = "JSESSIONID" + "=" + session.getId()
++ "; Path=/CoursesRegistrationApp; SameSite=Strict; HttpOnly; Secure";
+response.setHeader("Set-Cookie", setCookieHeader);
+response.setHeader("X-Frame-Options", "SAMEORIGIN");
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <!DOCTYPE html>
 <html lang="en">
