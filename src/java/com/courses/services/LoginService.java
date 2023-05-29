@@ -15,12 +15,14 @@ import javax.servlet.http.HttpSession;
 import com.courses.dao.AccountDAO;
 import com.courses.models.Account;
 import com.courses.models.Person;
+import com.courses.filter.InputValidation;
 
 public class LoginService extends SuperService {
 
 	public LoginService(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
+
 
 	private String hashSHA256(String password) {
 		try {
@@ -46,7 +48,6 @@ public class LoginService extends SuperService {
 
 	public void handleGetLogin() throws ServletException, IOException {
 		String url = "/pages/client/login.jsp";
-
 		super.forwardToPage(url);
 	}
 
@@ -79,8 +80,13 @@ public class LoginService extends SuperService {
 			// get parameters from login box
 			String role = this.request.getParameter("role-account");
 			String username = this.request.getParameter("username");
+
+			String password = this.request.getParameter("password");
+			System.out.println("username: " + username);
+			System.out.println("password: " + password);
+
 			String password = hashSHA256(this.request.getParameter("password"));
-			
+
 
 			// find account and user
 			Account foundAccount = getAccount(username);
@@ -90,16 +96,28 @@ public class LoginService extends SuperService {
 			if (foundAccount != null) {
 				person = foundAccount.getPerson();
 			}
+
+		
+			 // Kiểm tra đầu vào 
+			if (!(InputValidation.isCheckEmail(username) && InputValidation.isCheckPassword(password) && InputValidation.isCheckRole(role))) {
+			 System.out.print("Dữ liệu đầu vào không hợp lệ"); url =
+			 "/pages/client/login.jsp"; errorMessage = "* Không tìm thấy tài khoản !";
+			 request.setAttribute("error", errorMessage); super.forwardToPage(url);
+			 return; }
+			
+
 			// check if this account is existing
 			if (foundAccount != null && checkRole(role, person) && person.getIsDeleted() == 0) {
 				if (password.equals(foundAccount.getPassword())) {
-					System.out.print(password);
+
 
 					// define user id cookie timeout 30'
 					Cookie c = new Cookie("userIdCookie", person.getPersonId());
 					// 30 min
 					c.setMaxAge(30 * 60);
 					c.setPath("/");
+					c.setHttpOnly(true);
+					c.setSecure(true);
 					this.response.addCookie(c);
 
 					// define url base on role
