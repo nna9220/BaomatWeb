@@ -1,7 +1,14 @@
 package com.courses.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -13,6 +20,7 @@ import javax.persistence.*;
 	@NamedQuery(name = "Account.findByPerson", query = "SELECT a FROM Account a WHERE a.person = :person") })
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@Column(name="account_id")
@@ -53,7 +61,7 @@ public class Account implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+	this.password= password;
 	}
 
 	public String getUsername() {
