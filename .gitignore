@@ -46,3 +46,4 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 1
+/bin/

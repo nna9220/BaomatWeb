@@ -32,6 +32,7 @@ public class LogoutService extends SuperService{
 		Cookie userId = new Cookie("userIdCookie","");  
 		userId.setPath("/");
         userId.setMaxAge(0);  
+        userId.setHttpOnly(true);
         response.addCookie(userId);  
         
         // destroy session
