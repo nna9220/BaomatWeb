@@ -19,11 +19,21 @@ request.setCharacterEncoding("utf-8");
 		<main id="main">
 			<div class="grid">
 				<div class="form_container">
+
+					<form id="form" action="<%=context%>/login" method="POST">
 					<form id="form" action="<%=context%>/login" method="POST" onsubmit="validateForm(event);">
 						<h2 class="login-label">Đăng nhập</h2>
 						<div class="login_role">
 							<div class="login_role-item">
 								<input type="radio" id="sinhvien" value="student"
+
+									name="role-account" checked="checked" /> <label
+									for="sinhvien">Sinh viên</label>
+							</div>
+							<div class="login_role-item">
+								<input type="radio" id="giangvien" value="teacher"
+									name="role-account" /> <label
+									for="giangvien">Giảng viên</label>
 									name="role-account" checked="checked" /> <label for="sinhvien">Sinh
 									viên</label>
 							</div>
@@ -39,6 +49,10 @@ request.setCharacterEncoding("utf-8");
 						</div>
 
 						<div class="login_input">
+							<input type="hidden" name="csrfToken"
+								value="${sessionScope.csrfToken}"> <label
+								for="username" class="login_input-label">Tên
+								đăng nhập:</label> <input type="text" id="username" name="username"
 							<label for="username" class="login_input-label">Tên đăng
 								nhập:</label> <input type="text" id="username" name="username"
 								value="${username}"
@@ -46,6 +60,9 @@ request.setCharacterEncoding("utf-8");
 						</div>
 
 						<div class="login_input">
+							<label for="password" class="login_input-label">Mật
+								khẩu:</label> <input type="password" id="password" name="password"
+								value="${password}"
 							<label for="password" class="login_input-label">Mật khẩu:</label>
 							<input type="password" id="password" name="password"
 							value="${password}"
@@ -70,7 +87,6 @@ request.setCharacterEncoding("utf-8");
 					</form>
 				</div>
 			</div>
-			
 			<!--HTML entities onsubmit="validateForm(event);" -->
 			<script nonce="2726c7f26c">
 				function encodeHtmlEntities(str) {
@@ -149,7 +165,6 @@ request.setCharacterEncoding("utf-8");
 		        let form = document.getElementById("form");
 				form.addEventListener('submit', validateForm);s
 		    </script> -->
-		    
 		</main>
 		<!-- Footer -->
 		<jsp:include page="./partials/footer.jsp" />

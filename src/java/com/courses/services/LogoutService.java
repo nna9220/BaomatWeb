@@ -1,6 +1,8 @@
 package com.courses.services;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -15,6 +17,12 @@ public class LogoutService extends SuperService{
 	}
 	
 	public LogoutService () {}
+	public static String generateCSRFToken() {
+		SecureRandom secureRandom = new SecureRandom();
+		byte[] tokenBytes = new byte[16];
+		secureRandom.nextBytes(tokenBytes);
+		return Base64.getUrlEncoder().withoutPadding().encodeToString(tokenBytes);
+	}
 	
 	public void handleGetLogout() throws ServletException, IOException {
 		// define url
@@ -34,6 +42,8 @@ public class LogoutService extends SuperService{
         }
         
         // forward to jsp file
+        String csrfToken = generateCSRFToken();
+		request.getSession().setAttribute("csrfToken", csrfToken);
 		super.redirectToPage(request.getContextPath() + url);
 	}
 	
