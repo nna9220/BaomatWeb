@@ -4,8 +4,8 @@
 	pageEncoding="UTF-8"%>
 <%
 String context = request.getContextPath();
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
-
 <nav id="sidebar" class="">
 	<div class="sidebar-header">
 		<img

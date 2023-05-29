@@ -5,6 +5,7 @@
 <%
 String context = request.getContextPath();
 Person person = (Person)request.getSession().getAttribute("person");
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <nav
 	class="navbar navbar-expand-lg navbar-white bg-white d-flex justify-content-between">

@@ -6,6 +6,7 @@
 String context = request.getContextPath();
 String type = (String) request.getAttribute("type");
 String title = type.substring(0, 1).toUpperCase() + type.substring(1);
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <!DOCTYPE html>
 <html lang="en">

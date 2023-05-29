@@ -9,7 +9,9 @@
 String type = (String) request.getAttribute("type");
 String title = "";
 String context = request.getContextPath();
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
+
 
 <div class="modal fade" id="modalCreateRP" tabindex="-1"
 	aria-labelledby="exampleModalLabel" aria-hidden="true"="true"

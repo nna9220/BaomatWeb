@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%response.setHeader("X-Content-Type-Options", "nosniff"); %>
 <div class="tab-pane fade active show" id="general" role="tabpanel"
 	aria-labelledby="general-tab">
 	<div class="col-md-6">

@@ -17,6 +17,7 @@ if (type.equals(RoleConstants.ADMIN)) {
 } else if (type.equals(RoleConstants.STUDENT)) {
 	prefix = "ST";
 }
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 
 <form method="POST" action="create-user">

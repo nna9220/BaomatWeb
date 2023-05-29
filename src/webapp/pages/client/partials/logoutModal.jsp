@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%
-String context = request.getContextPath();
-%>
-<!-- Modal -->
+    pageEncoding="UTF-8"%>
+  
+  <%
+  	String context = request.getContextPath();
+  response.setHeader("X-Content-Type-Options", "nosniff");
+  %>
+  
+ <!-- Modal -->
 
 <form method="get" action="<%=context%>/logout">
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
