@@ -4,6 +4,7 @@
 
 <%
 String context = request.getContextPath();
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <!DOCTYPE html>
 <html lang="en">

@@ -5,6 +5,8 @@
 
 <%
 String context = request.getContextPath();
+response.setHeader("Strict-Transport-Security", "max-age=31336000; includeSubdomains");
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <!DOCTYPE html>
 <html lang="en">

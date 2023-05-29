@@ -6,6 +6,8 @@
 <%
 String context = request.getContextPath();
 String check = (String) request.getAttribute("notExistPeriod");
+response.setHeader("Strict-Transport-Security", "max-age=31336000; includeSubdomains");
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 
 <!DOCTYPE html>

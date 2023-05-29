@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- Modal -->
+
+<%response.setHeader("X-Content-Type-Options", "nosniff"); %><!-- Modal -->
 <div class="modal fade" id="modalConfirmDeleteBoard" tabindex="-1"
 	aria-labelledby="exampleModalLabel" aria-hidden="true"="true">
 	<div class="modal-dialog">

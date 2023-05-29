@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String context = request.getContextPath();
+response.setHeader("X-Content-Type-Options", "nosniff");
 %>
 <ul class="category-list">
 	<li class="category-item"><ion-icon name="home-outline"></ion-icon>

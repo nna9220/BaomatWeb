@@ -12,6 +12,7 @@
 
 <%
 String context = request.getContextPath();
+response.setHeader("X-Content-Type-Options", "nosniff");
 
 String userId = "";
 Cookie[] cookies = request.getCookies();

@@ -3,7 +3,9 @@
   
   <%
   	String context = request.getContextPath();
+  response.setHeader("X-Content-Type-Options", "nosniff");
   %>
+  
  <!-- Modal -->
  <div class="modal fade" id="periodModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

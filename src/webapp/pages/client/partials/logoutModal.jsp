@@ -3,7 +3,9 @@
   
   <%
   	String context = request.getContextPath();
+  response.setHeader("X-Content-Type-Options", "nosniff");
   %>
+  
  <!-- Modal -->
  
 <form method="get" action="<%=context%>/logout">
