@@ -1,11 +1,13 @@
 package com.courses.services.admin.user;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import com.courses.dao.AccountDAO;
 import com.courses.dao.PersonDAO;
@@ -18,6 +20,24 @@ public class AccountService extends SuperService {
 
 	PersonDAO personDAO = null;
 	AccountDAO accountDAO = null;
+	private String hashSHA256(String password) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : hash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) {
+					hexString.append('0');
+				}
+				hexString.append(hex);
+			}
+			return hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public AccountService(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
@@ -34,7 +54,7 @@ public class AccountService extends SuperService {
 			// Get Params
 			String personId = this.request.getParameter("personId");
 			String username = this.request.getParameter("username");
-			String password = this.request.getParameter("password");
+			String password = hashSHA256(this.request.getParameter("password"));
 			String desc = this.request.getParameter("description");
 			// Get person
 			Person person = this.personDAO.find(personId);
