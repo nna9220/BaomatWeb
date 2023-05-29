@@ -1,6 +1,9 @@
 package com.courses.services;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,15 +12,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.courses.dao.AccountDAO;
 import com.courses.models.Account;
 import com.courses.models.Person;
-import com.courses.dao.AccountDAO;
 import com.courses.filter.InputValidation;
 
 public class LoginService extends SuperService {
 
 	public LoginService(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
+	}
+
+
+	private String hashSHA256(String password) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : hash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) {
+					hexString.append('0');
+				}
+				hexString.append(hex);
+			}
+			return hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public LoginService() {
@@ -57,9 +80,13 @@ public class LoginService extends SuperService {
 			// get parameters from login box
 			String role = this.request.getParameter("role-account");
 			String username = this.request.getParameter("username");
+
 			String password = this.request.getParameter("password");
 			System.out.println("username: " + username);
 			System.out.println("password: " + password);
+
+			String password = hashSHA256(this.request.getParameter("password"));
+
 
 			// find account and user
 			Account foundAccount = getAccount(username);
@@ -82,6 +109,7 @@ public class LoginService extends SuperService {
 			// check if this account is existing
 			if (foundAccount != null && checkRole(role, person) && person.getIsDeleted() == 0) {
 				if (password.equals(foundAccount.getPassword())) {
+
 
 					// define user id cookie timeout 30'
 					Cookie c = new Cookie("userIdCookie", person.getPersonId());
