@@ -258,33 +258,33 @@ INSERT INTO `Admin`(admin_id, person_id) VALUES('AD00000002', 'PE00000014');
 
 
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000001', '20110756@student.hcmute.edu.vn', 'pnnt', N'Tài khoản sinh viên', 'PE00000001');
+VALUES('AC00000001', '20110756@student.hcmute.edu.vn', SHA2('pnnt',256), N'Tài khoản sinh viên', 'PE00000001');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000002', '20110743@student.hcmute.edu.vn', 'ddtt', N'Tài khoản sinh viên', 'PE00000002');
+VALUES('AC00000002', '20110743@student.hcmute.edu.vn', SHA2('ddtt',256), N'Tài khoản sinh viên', 'PE00000002');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000003', '20110205@student.hcmute.edu.vn', 'vha', N'Tài khoản sinh viên', 'PE00000003');
+VALUES('AC00000003', '20110205@student.hcmute.edu.vn', SHA2('vha',256), N'Tài khoản sinh viên', 'PE00000003');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000004', '20110202@student.hcmute.edu.vn', 'tcm', N'Tài khoản sinh viên', 'PE00000004');
+VALUES('AC00000004', '20110202@student.hcmute.edu.vn', SHA2('tcm',256), N'Tài khoản sinh viên', 'PE00000004');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000005', '20110101@student.hcmute.edu.vn', 'pvp', N'Tài khoản sinh viên', 'PE00000005');
+VALUES('AC00000005', '20110101@student.hcmute.edu.vn', SHA2('pvp',256), N'Tài khoản sinh viên', 'PE00000005');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000006', '20110102@student.hcmute.edu.vn', 'ntn', N'Tài khoản sinh viên', 'PE00000006');
+VALUES('AC00000006', '20110102@student.hcmute.edu.vn', SHA2('ntn',256), N'Tài khoản sinh viên', 'PE00000006');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000007', 'phunghx@hcmute.edu.vn', 'hxp', N'Tài khoản giảng viên', 'PE00000007');
+VALUES('AC00000007', 'phunghx@hcmute.edu.vn', SHA2('hxp',256), N'Tài khoản giảng viên', 'PE00000007');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000008', 'vanntt@hcmute.edu.vn', 'nttv', N'Tài khoản giảng viên', 'PE00000008');
+VALUES('AC00000008', 'vanntt@hcmute.edu.vn', SHA2('nttv',256), N'Tài khoản giảng viên', 'PE00000008');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000009', 'sonnt@hcmute.edu.vn', 'nts', N'Tài khoản giảng viên', 'PE00000009');
+VALUES('AC00000009', 'sonnt@hcmute.edu.vn', SHA2('nts',256), N'Tài khoản giảng viên', 'PE00000009');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000010', 'tutc@hcmute.edu.vn', 'tct', N'Tài khoản giảng viên', 'PE00000010');
+VALUES('AC00000010', 'tutc@hcmute.edu.vn', SHA2('tct',256), N'Tài khoản giảng viên', 'PE00000010');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000011', 'chaultm@hcmute.edu.vn', 'ltmc', N'Tài khoản giảng viên', 'PE00000011');
+VALUES('AC00000011', 'chaultm@hcmute.edu.vn', SHA2('ltmc',256), N'Tài khoản giảng viên', 'PE00000011');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000012', 'vannguyentt@hcmute.edu.vn', 'nttv', N'Tài khoản giảng viên', 'PE00000012');
+VALUES('AC00000012', 'vannguyentt@hcmute.edu.vn', SHA2('nttv',256), N'Tài khoản giảng viên', 'PE00000012');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000013', 'admin1@hcmute.edu.vn', 'admin1', N'Tài khoản admin', 'PE00000013');
+VALUES('AC00000013', 'admin1@hcmute.edu.vn', SHA2('admin1',256), N'Tài khoản admin', 'PE00000013');
 INSERT INTO `Account`(account_id, username, `password`, `description`, person_id) 
-VALUES('AC00000014', 'admin2@hcmute.edu.vn', 'admin2', N'Tài khoản admin', 'PE00000014');
+VALUES('AC00000014', 'admin2@hcmute.edu.vn', SHA2('admin2',256), N'Tài khoản admin', 'PE00000014');
 
 INSERT INTO `Board`(board_id, board_name, no_member, `description`) 
 VALUES('BO00000001', 'This is board 1', 3, 'No description');
