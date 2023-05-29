@@ -9,8 +9,7 @@
 String context = request.getContextPath();
 TopicDAO td = new TopicDAO();
 String check = (String)request.getAttribute("isAdded");
-response.setHeader("Strict-Transport-Security", "max-age=31336000; includeSubdomains");
-response.setHeader("X-Content-Type-Options", "nosniff");
+
 %>
 
 <!DOCTYPE html>

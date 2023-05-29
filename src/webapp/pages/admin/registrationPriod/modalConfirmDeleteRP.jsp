@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
  	String context = request.getContextPath();
-response.setHeader("X-Content-Type-Options", "nosniff");
  %>
- 
 <!-- Modal -->
 <form method="get" action="<%=context %>/admin/registration-priods/delete/">
 	<div class="modal fade" id="modalConfirmDeleteRP" tabindex="-1"

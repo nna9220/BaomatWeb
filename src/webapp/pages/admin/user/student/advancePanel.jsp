@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%response.setHeader("X-Content-Type-Options", "nosniff"); %>
 <div class="tab-pane fade" id="advance" role="tabpanel"
 	aria-labelledby="advance-tab">
 	<div class="col-md-6">
